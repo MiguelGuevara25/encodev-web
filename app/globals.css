@@ -1,26 +1,21 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-brand-sky: #749fb4;
+  --color-brand-orange: #ec8c35;
+  --color-brand-navy: #254b5e;
+  --color-brand-white: #fff;
+
+  /* 1. Registra la fuente en el tema de Tailwind v4 */
+  --font-sans: "Sora Variable", sans-serif;
+  --font-mono: "JetBrains Mono Variable", monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* 2. Aplícala al body si es necesario (o Tailwind la aplicará automáticamente al ser font-sans) */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+html {
+  scroll-behavior: smooth !important;
 }
