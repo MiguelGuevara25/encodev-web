@@ -1,4 +1,7 @@
-"use client"
+"use client";
+
+import Image from "next/image";
+import Logo from "../assets/img/logo_L.webp";
 
 export default function Footer() {
   const WHATSAPP_URL =
@@ -18,9 +21,9 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-16">
           <div className="col-span-2">
-            <span className="font-extrabold text-3xl tracking-tighter">
-              ENCODEV.
-            </span>
+            <div>
+              <Image src={Logo} alt="Logo Encodev" width={160} height={160} />
+            </div>
             <p className="text-white/50 mt-4 max-w-sm leading-relaxed">
               Estudio boutique de desarrollo web y formación. Código que enseña.
             </p>
@@ -71,10 +74,10 @@ export default function Footer() {
             <ul className="space-y-2 text-white/70 font-mono text-sm">
               <li>
                 <a
-                  href="mailto:hola@encodev.pro"
+                  href="mailto:encode_dev@hotmail.com"
                   className="hover:text-brand-orange transition-colors"
                 >
-                  hola@encodev.pro
+                  Correo
                 </a>
               </li>
               <li>
@@ -106,7 +109,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pt-8 border-t border-white/10 text-xs font-mono text-white/40">
           <p>© 2026 Encodev. Todos los derechos reservados.</p>
           <p className="uppercase tracking-[0.25em]">
-            Hecho con código, no con plantillas
+            Hecho con código, de forma profesional.
           </p>
         </div>
       </div>

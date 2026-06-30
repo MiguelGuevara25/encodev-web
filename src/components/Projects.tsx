@@ -1,5 +1,7 @@
 import Image, { StaticImageData } from "next/image";
-import projectNexus from "../assets/img/image.png";
+import projectHCTSolar from "../assets/img/hct-solar.webp";
+import projectGlinseal from "../assets/img/glinseal.webp";
+import projectKlandestino from "../assets/img/klandestino.webp";
 
 interface Project {
   title: string;
@@ -12,40 +14,40 @@ interface Project {
 export default function Projects() {
   const projects: Project[] = [
     {
-      title: "Nexus Intelligence",
-      tag: "Sistema a medida / UI & UX",
-      year: "2024",
-      image: projectNexus,
+      title: "HCT Solar",
+      tag: "Desarrollo Web / Landing Page",
+      year: "2026",
+      image: projectHCTSolar,
       description:
-        "Dashboard de inteligencia de datos para equipos comerciales. Reportes en tiempo real e integraciones a medida.",
+        "Desarrollo de la página web de HCT Solar, enfocada en tecnología automatizada de limpieza solar fotovoltaica.",
     },
     {
-      title: "Lumina Retail",
-      tag: "E-Commerce / Página web",
+      title: "Glinseal",
+      tag: "Desarrollo Web / Landing Page",
       year: "2024",
-      image: projectNexus,
+      image: projectGlinseal,
       description:
-        "Tienda online minimalista con catálogo dinámico, carrito persistente y checkout optimizado para conversión.",
+        "Desarrollo de la página informativa para Glinseal, sobre su sistema de tracking con seguridad RFID",
     },
     {
-      title: "Encodev Learn",
-      tag: "Formación / Mentoría 1 a 1",
+      title: "Klandestino Jiu Jitsu",
+      tag: "Desarrollo Web / Landing Page",
       year: "2025",
-      image: projectNexus,
+      image: projectKlandestino,
       description:
-        "Programa de enseñanza personalizado en desarrollo web. Próximamente: plataforma propia con videos y ejercicios.",
+        "Desarrollo de la página informativa de Klandestino Jiu Jitsu, para ofrecer sus servicios de entrenamiento.",
     },
   ];
 
   return (
     <section id="proyectos" className="py-32 bg-brand-navy">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
-        <div className="flex justify-between items-end mb-16">
+        <div className="flex flex-col md:flex-row justify-between md:items-end mb-16">
           <h2 className="text-5xl md:text-7xl font-extrabold text-white tracking-tighter italic">
-            Vitrina.
+            Proyectos
           </h2>
           <p className="font-mono text-brand-sky text-sm pb-2">
-            [{String(projects.length).padStart(2, "0")} Seleccionados]
+            [Confiaron en nosotros]
           </p>
         </div>
       </div>
@@ -66,7 +68,7 @@ export default function Projects() {
                 width={1600}
                 height={1000}
                 loading="lazy"
-                className="w-full aspect-16/10 object-cover group-hover:scale-105 transition-transform duration-700"
+                className="w-full aspect-16/10 object-cover object-top group-hover:scale-105 transition-transform duration-700"
               />
             </div>
             <div className="flex justify-between items-start gap-6">

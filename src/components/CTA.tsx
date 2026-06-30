@@ -2,7 +2,7 @@
 
 export default function CTA() {
   const WHATSAPP_URL =
-    "https://wa.me/000000000000?text=Hola%20Encodev%2C%20quiero%20un%20presupuesto%20para%20mi%20proyecto.";
+    "https://wa.me/+51931130017?text=Hola%20Encodev%2C%20quiero%20un%20presupuesto%20para%20mi%20proyecto.";
   const CALENDAR_URL = "https://calendly.com/encodev/30min";
 
   type CtaSource = "hero" | "footer_cta" | "nav";
