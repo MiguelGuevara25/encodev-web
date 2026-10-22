@@ -27,10 +27,10 @@ export default async function Projects() {
             imagenPrincipal: {
               node: { sourceUrl, altText },
             },
-            nombreDelCliente,
-            tipoDeProyecto,
+            nombreCliente,
+            tipoProyecto,
             descripcionCorta,
-            fechaDeEntrega,
+            fechaEntrega,
           } = p.camposProyecto;
 
           return (
@@ -52,17 +52,17 @@ export default async function Projects() {
               <div className="flex justify-between items-start gap-6">
                 <div>
                   <h3 className="text-2xl font-bold text-white mb-2">
-                    {nombreDelCliente}
+                    {nombreCliente}
                   </h3>
                   <p className="text-brand-sky font-mono text-xs uppercase tracking-widest mb-3">
-                    {tipoDeProyecto[0]}
+                    {tipoProyecto[0]}
                   </p>
                   <p className="text-white/60 leading-relaxed max-w-md">
                     {descripcionCorta}
                   </p>
                 </div>
                 <span className="text-brand-orange font-bold font-mono shrink-0">
-                  {fechaDeEntrega?.substring(0, 4)}
+                  {fechaEntrega?.substring(0, 4)}
                 </span>
               </div>
             </article>

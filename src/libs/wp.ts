@@ -5,8 +5,8 @@ export const getProjects = async () => {
         nodes {
           id
           camposProyecto {
-            nombreDelCliente
-            tipoDeProyecto
+            nombreCliente
+            tipoProyecto
             descripcionCorta
             imagenPrincipal {
               node {
@@ -14,8 +14,8 @@ export const getProjects = async () => {
                 altText
               }
             }
-            urlDelProyecto
-            fechaDeEntrega
+            urlProyecto
+            fechaEntrega
           }
         }
       }

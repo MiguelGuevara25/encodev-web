@@ -1,6 +1,6 @@
 interface Projects {
-  nombreDelCliente: string;
-  tipoDeProyecto: string;
+  nombreCliente: string;
+  tipoProyecto: string;
   descripcionCorta: string;
   imagenPrincipal: {
     node: {
@@ -8,8 +8,8 @@ interface Projects {
       altText: string;
     };
   };
-  urlDelProyecto: string;
-  fechaDeEntrega: string;
+  urlProyecto: string;
+  fechaEntrega: string;
 }
 
 export interface ProyectoWP {

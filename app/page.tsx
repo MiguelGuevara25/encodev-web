@@ -11,7 +11,7 @@ export default function Home() {
     <div className="bg-brand-white text-brand-navy font-display selection:bg-brand-orange/20">
       <Navbar />
       <Hero />
-      {/* <Projects /> */}
+      <Projects />
       <Services />
       <Testimonials />
       <CTA />
