@@ -49,5 +49,5 @@ jobs:
           protocol: ftps
           local-dir: ./out/
           server-dir: public_html/encodev-site/
-          dry-run: true
+          dry-run: false
           log-level: standard
