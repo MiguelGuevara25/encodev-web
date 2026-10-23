@@ -9,7 +9,7 @@ export default function Hero() {
         </p>
         <h1 className="text-6xl sm:text-7xl md:text-[10rem] font-extrabold leading-[0.85] tracking-tighter mb-12">
           CÓDIGO <br />
-          <span className="text-brand-orange">QUE</span> ENSEÑA.
+          <span className="text-brand-orange">QUE</span> ENSEÑA p.
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-end">
           <p className="text-xl md:text-2xl text-brand-navy/70 max-w-md leading-relaxed">
