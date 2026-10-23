@@ -5,7 +5,12 @@ on:
   push:
     branches:
       - main
+
   workflow_dispatch:
+
+  repository_dispatch:
+    types:
+      - wordpress_project_updated
 
 permissions:
   contents: read
