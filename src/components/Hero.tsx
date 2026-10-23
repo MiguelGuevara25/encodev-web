@@ -4,6 +4,7 @@ export default function Hero() {
       <div className="max-w-6xl mx-auto w-full">
         <p className="font-mono text-xs uppercase tracking-[0.25em] text-brand-sky mb-6 flex items-center gap-3">
           <span className="w-12 h-px bg-brand-sky" />
+          Agencia Digital
           Desarrollo digital &amp; formación
         </p>
         <h1 className="text-6xl sm:text-7xl md:text-[10rem] font-extrabold leading-[0.85] tracking-tighter mb-12">
