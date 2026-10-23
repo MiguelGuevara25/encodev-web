@@ -30,7 +30,6 @@ export const getProjects = async () => {
         Accept: "application/json",
       },
       body: JSON.stringify({ query }),
-      cache: "no-store",
     });
 
     const text = await res.text();
