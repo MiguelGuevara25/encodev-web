@@ -25,7 +25,7 @@ export default function Footer() {
               <Image src={Logo} alt="Logo Encodev" width={160} height={160} />
             </div>
             <p className="text-white/50 mt-4 max-w-sm leading-relaxed">
-              Estudio boutique de desarrollo web y formación. Código que enseña.
+              Consultora de Tecnología. Desarrollamos sistemas a medida, automatizamos procesos con IA e integramos tus herramientas para que tu empresa gane eficiencia y escale.
             </p>
           </div>
           <div>
@@ -33,6 +33,14 @@ export default function Footer() {
               Navegación
             </p>
             <ul className="space-y-2 text-white/70">
+              <li>
+                <a
+                  href="#inicio"
+                  className="hover:text-brand-orange transition-colors"
+                >
+                  Inicio
+                </a>
+              </li>
               <li>
                 <a
                   href="#proyectos"
