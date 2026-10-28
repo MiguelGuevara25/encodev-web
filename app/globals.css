@@ -19,3 +19,22 @@ body {
 html {
   scroll-behavior: smooth !important;
 }
+
+@keyframes encodev-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: encodev-marquee 30s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
