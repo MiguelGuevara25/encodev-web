@@ -6,12 +6,6 @@ export default function Navbar() {
       </span>
       <div className="hidden md:flex gap-10 text-[10px] font-bold uppercase tracking-[0.2em] text-white/80">
         <a
-          href="#inicio"
-          className="hover:text-brand-orange transition-colors"
-        >
-          Inicio
-        </a>
-        <a
           href="#proyectos"
           className="hover:text-brand-orange transition-colors"
         >
@@ -29,11 +23,23 @@ export default function Navbar() {
         >
           Academia
         </a>
+        <a href="#ia" className="hover:text-brand-orange transition-colors">
+          IA
+        </a>
+        <a
+          href="#paquetes"
+          className="hover:text-brand-orange transition-colors"
+        >
+          Paquetes
+        </a>
         <a
           href="#testimonios"
           className="hover:text-brand-orange transition-colors"
         >
           Testimonios
+        </a>
+        <a href="#faq" className="hover:text-brand-orange transition-colors">
+          FAQ
         </a>
         <a
           href="#contacto"
