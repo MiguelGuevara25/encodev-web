@@ -1,3 +1,27 @@
+import axios from "axios";
+
+const WP_GRAPHQL_URL = "https://admin.encodev.site/graphql";
+
+async function fetchWP(query: string) {
+  try {
+    const { data } = await axios.post(
+      WP_GRAPHQL_URL,
+      { query },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      },
+    );
+
+    return data?.data ?? null;
+  } catch (error) {
+    console.error("Error conectando con WordPress:", error);
+    return null;
+  }
+}
+
 export const getProjects = async () => {
   const query = `
     query GetProyectos {
@@ -22,41 +46,36 @@ export const getProjects = async () => {
     }
   `;
 
-  try {
-    const res = await fetch("https://admin.encodev.site/graphql", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({ query }),
-    });
+  const { proyectos } = await fetchWP(query);
+  return proyectos?.nodes ?? [];
+};
 
-    const text = await res.text();
-
-    if (!res.ok) {
-      console.error("Error HTTP WordPress:", res.status);
-      console.error("Respuesta:", text.slice(0, 500));
-      return [];
+export const getTestimonials = async () => {
+  const query = `
+    query GetTestimonios {
+      testimonios {
+        nodes {
+          id
+          camposTestimonios {
+            nombreCliente
+            cargoCliente
+            empresaCliente
+            descripcion
+            testimonio
+            resultadoClave
+            valoracion
+            fotoCliente {
+              node {
+                sourceUrl
+                altText
+              }
+            }
+          }
+        }
+      }
     }
+  `;
 
-    let json;
-
-    try {
-      json = JSON.parse(text);
-    } catch {
-      console.error("WordPress no devolvió JSON:", text.slice(0, 500));
-      return [];
-    }
-
-    if (json.errors) {
-      console.error("Errores GraphQL:", json.errors);
-      return [];
-    }
-
-    return json.data?.proyectos?.nodes ?? [];
-  } catch (error) {
-    console.error("Error conectando con WordPress:", error);
-    return [];
-  }
+  const { testimonios } = await fetchWP(query);
+  return testimonios?.nodes ?? [];
 };

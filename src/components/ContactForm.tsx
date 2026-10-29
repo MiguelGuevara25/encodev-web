@@ -1,4 +1,34 @@
-const Form = () => {
+"use client";
+import { useForm } from "react-hook-form";
+
+type ContactFormValues = {
+  plan: string;
+  name: string;
+  email: string;
+  message: string;
+};
+
+const ContactForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<ContactFormValues>({
+    defaultValues: {
+      plan: "",
+      name: "",
+      email: "",
+      message: "",
+    },
+  });
+
+  const onSubmit = (data: ContactFormValues) => {
+    console.log("Formulario de contacto enviado:", data);
+    alert("Mensaje enviado correctamente. Te responderemos en menos de 48 h.");
+    reset();
+  };
+
   return (
     <section
       id="formulario"
@@ -19,7 +49,10 @@ const Form = () => {
           </p>
         </div>
 
-        <form noValidate className="md:col-span-7 space-y-6">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="md:col-span-7 space-y-6"
+        >
           <div>
             <label
               htmlFor="plan"
@@ -29,7 +62,7 @@ const Form = () => {
             </label>
 
             <select
-              id="plan"
+              {...register("plan", { required: true })}
               className="w-full px-4 py-3 rounded-xl bg-white border border-brand-navy/15 focus:border-brand-navy outline-none transition-colors"
             >
               <option value="">Aún no lo tengo claro</option>
@@ -39,6 +72,11 @@ const Form = () => {
               </option>
               <option value="Premium">Premium · USD 4.500 – 15.000+</option>
             </select>
+            {errors.plan && (
+              <p className="text-xs text-brand-orange">
+                Este campo es obligatorio
+              </p>
+            )}
           </div>
 
           <div>
@@ -49,13 +87,14 @@ const Form = () => {
               Nombre
             </label>
             <input
-              id="name"
-              type="text"
-              autoComplete="name"
-              maxLength={100}
-              required
+              {...register("name", { required: true })}
               className={`w-full px-4 py-3 rounded-xl bg-white border border-brand-navy/15 focus:border-brand-navy outline-none transition-colors`}
             />
+            {errors.name && (
+              <p className="text-xs text-brand-orange">
+                Este campo es obligatorio
+              </p>
+            )}
           </div>
 
           <div>
@@ -66,13 +105,16 @@ const Form = () => {
               Email
             </label>
             <input
-              id="email"
+              {...register("email", { required: true })}
               type="email"
-              autoComplete="email"
               maxLength={255}
-              required
               className={`w-full px-4 py-3 rounded-xl bg-white border border-brand-navy/15 focus:border-brand-navy outline-none transition-colors`}
             />
+            {errors.email && (
+              <p className="text-xs text-brand-orange">
+                Este campo es obligatorio
+              </p>
+            )}
           </div>
 
           <div>
@@ -83,22 +125,33 @@ const Form = () => {
               Mensaje
             </label>
             <textarea
-              id="message"
+              {...register("message", { required: true })}
               rows={5}
               maxLength={2000}
-              required
               className={`w-full px-4 py-3 rounded-xl bg-white border border-brand-navy/15 focus:border-brand-navy outline-none transition-colors resize-none`}
             />
+            {errors.message && (
+              <p className="text-xs text-brand-orange">
+                Este campo es obligatorio
+              </p>
+            )}
             <div className="flex justify-between mt-2">
               {/* <span className="text-xs text-brand-navy/40 tabular-nums">
                 {form.message.length}/2000
               </span> */}
             </div>
           </div>
+
+          <button
+            type="submit"
+            className="w-full sm:w-auto px-8 py-4 bg-brand-navy text-white font-bold rounded-full hover:bg-brand-orange transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+          >
+            Enviar mensaje
+          </button>
         </form>
       </div>
     </section>
   );
 };
 
-export default Form;
+export default ContactForm;

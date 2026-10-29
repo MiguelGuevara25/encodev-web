@@ -2,7 +2,7 @@ import AiLab from "@/src/components/AiLab";
 import CTA from "@/src/components/CTA";
 import Faq from "@/src/components/Faq";
 import Footer from "@/src/components/Footer";
-import Form from "@/src/components/Form";
+import ContactForm from "@/src/components/ContactForm";
 import Hero from "@/src/components/Hero";
 import Navbar from "@/src/components/Navbar";
 import Packages from "@/src/components/Packages";
@@ -19,9 +19,9 @@ export default function Home() {
       <Services />
       <Testimonials />
       <AiLab />
-      <Packages />
+      {/* <Packages /> */}
       <Faq />
-      <Form />
+      <ContactForm />
       <CTA />
       <Footer />
     </div>
