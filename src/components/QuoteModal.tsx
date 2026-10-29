@@ -1,23 +1,40 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 
 type QuoteModalProps = {
   open: boolean;
   onClose: () => void;
 };
 
+type QuoteFormValues = {
+  name: string;
+  contact: string;
+  projectType: string;
+  description: string;
+  budget: string;
+};
+
 const WHATSAPP_NUMBER = "519311300017";
 
 export default function QuoteModal({ open, onClose }: QuoteModalProps) {
-  const [form, setForm] = useState({
-    name: "",
-    contact: "",
-    projectType: "",
-    description: "",
-    budget: "",
-  });
   const [sent, setSent] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<QuoteFormValues>({
+    defaultValues: {
+      name: "",
+      contact: "",
+      projectType: "",
+      description: "",
+      budget: "",
+    },
+  });
 
   useEffect(() => {
     if (open) {
@@ -31,22 +48,14 @@ export default function QuoteModal({ open, onClose }: QuoteModalProps) {
 
   if (!open) return null;
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const onSubmit = (data: QuoteFormValues) => {
     const message =
       "*SOLICITUD DE COTIZACIÓN - ENCODEV*\n\n" +
-      `*Nombre / Empresa:* ${form.name || "-"}\n` +
-      `*Contacto (Teléfono/Correo):* ${form.contact || "-"}\n` +
-      `*Tipo de proyecto:* ${form.projectType || "-"}\n` +
-      `*Presupuesto aproximado:* ${form.budget || "A definir"}\n\n` +
-      `*¿Qué necesita resolver?*\n${form.description || "-"}`;
+      `*Nombre / Empresa:* ${data.name || "-"}\n` +
+      `*Contacto (Teléfono/Correo):* ${data.contact || "-"}\n` +
+      `*Tipo de proyecto:* ${data.projectType || "-"}\n` +
+      `*Presupuesto aproximado:* ${data.budget || "A definir"}\n\n` +
+      `*¿Qué necesita resolver?*\n${data.description || "-"}`;
 
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank", "noopener,noreferrer");
@@ -56,13 +65,7 @@ export default function QuoteModal({ open, onClose }: QuoteModalProps) {
 
   const handleClose = () => {
     setSent(false);
-    setForm({
-      name: "",
-      contact: "",
-      projectType: "",
-      description: "",
-      budget: "",
-    });
+    reset();
     onClose();
   };
 
@@ -111,19 +114,19 @@ export default function QuoteModal({ open, onClose }: QuoteModalProps) {
 
         <div className="overflow-y-auto">
           {!sent ? (
-            <form onSubmit={handleSubmit} className="px-6 sm:px-10 pb-8 sm:pb-10 mt-8 space-y-5">
+            <form onSubmit={handleSubmit(onSubmit)} className="px-6 sm:px-10 pb-8 sm:pb-10 mt-8 space-y-5">
               <div className="space-y-2">
                 <label className="text-xs font-bold uppercase tracking-[0.2em] text-brand-navy/70">
                   Nombre y apellido / Empresa
                 </label>
                 <input
-                  required
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
+                  {...register("name", { required: true })}
                   placeholder="Ej. Juan Pérez / Mi Empresa SAC"
                   className="w-full px-4 py-3 rounded-xl border border-brand-navy/10 focus:border-brand-orange/80 focus:outline-none focus:ring-2 focus:ring-brand-orange/10 transition-colors text-brand-navy placeholder:text-brand-navy/40"
                 />
+                {errors.name && (
+                  <p className="text-xs text-brand-orange">Este campo es obligatorio</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -131,13 +134,13 @@ export default function QuoteModal({ open, onClose }: QuoteModalProps) {
                   Teléfono o correo
                 </label>
                 <input
-                  required
-                  name="contact"
-                  value={form.contact}
-                  onChange={handleChange}
+                  {...register("contact", { required: true })}
                   placeholder="Ej. +51 999 999 999 o nombre@empresa.com"
                   className="w-full px-4 py-3 rounded-xl border border-brand-navy/10 focus:border-brand-orange/80 focus:outline-none focus:ring-2 focus:ring-brand-orange/10 transition-colors text-brand-navy placeholder:text-brand-navy/40"
                 />
+                {errors.contact && (
+                  <p className="text-xs text-brand-orange">Este campo es obligatorio</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -145,10 +148,7 @@ export default function QuoteModal({ open, onClose }: QuoteModalProps) {
                   Tipo de proyecto
                 </label>
                 <select
-                  required
-                  name="projectType"
-                  value={form.projectType}
-                  onChange={handleChange}
+                  {...register("projectType", { required: true })}
                   className="w-full px-4 py-3 rounded-xl border border-brand-navy/10 focus:border-brand-orange/80 focus:outline-none focus:ring-2 focus:ring-brand-orange/10 transition-colors text-brand-navy"
                 >
                   <option value="" disabled>
@@ -159,16 +159,17 @@ export default function QuoteModal({ open, onClose }: QuoteModalProps) {
                   <option value="Capacitación & Mentoría Tech">Capacitación & Mentoría Tech</option>
                   <option value="Otro">Otro</option>
                 </select>
+                {errors.projectType && (
+                  <p className="text-xs text-brand-orange">Este campo es obligatorio</p>
+                )}
               </div>
 
-              {/* <div className="space-y-2">
+              <div className="space-y-2">
                 <label className="text-xs font-bold uppercase tracking-[0.2em] text-brand-navy/70">
                   Presupuesto aproximado (opcional)
                 </label>
                 <select
-                  name="budget"
-                  value={form.budget}
-                  onChange={handleChange}
+                  {...register("budget")}
                   className="w-full px-4 py-3 rounded-xl border border-brand-navy/10 focus:border-brand-orange/80 focus:outline-none focus:ring-2 focus:ring-brand-orange/10 transition-colors text-brand-navy"
                 >
                   <option value="">A definir</option>
@@ -177,21 +178,21 @@ export default function QuoteModal({ open, onClose }: QuoteModalProps) {
                   <option value="S/ 5,000 - S/ 10,000">S/ 5,000 - S/ 10,000</option>
                   <option value="> S/ 10,000">&gt; S/ 10,000</option>
                 </select>
-              </div> */}
+              </div>
 
               <div className="space-y-2">
                 <label className="text-xs font-bold uppercase tracking-[0.2em] text-brand-navy/70">
                   ¿Qué necesitas? Cuéntanos el problema a resolver
                 </label>
                 <textarea
-                  required
-                  name="description"
-                  value={form.description}
-                  onChange={handleChange}
+                  {...register("description", { required: true })}
                   rows={5}
                   placeholder="Ej. Necesito un sistema para controlar ventas, inventario y reportes. Quisiera automatizar X proceso..."
                   className="w-full px-4 py-3 rounded-xl border border-brand-navy/10 focus:border-brand-orange/80 focus:outline-none focus:ring-2 focus:ring-brand-orange/10 transition-colors text-brand-navy placeholder:text-brand-navy/40 resize-none"
                 />
+                {errors.description && (
+                  <p className="text-xs text-brand-orange">Este campo es obligatorio</p>
+                )}
               </div>
 
               <div className="flex flex-col gap-4 pt-2">
@@ -241,7 +242,10 @@ export default function QuoteModal({ open, onClose }: QuoteModalProps) {
                   Cerrar
                 </button>
                 <button
-                  onClick={() => setSent(false)}
+                  onClick={() => {
+                    setSent(false);
+                    reset();
+                  }}
                   className="w-full px-8 py-4 border border-brand-navy/15 font-bold rounded-full hover:border-brand-navy transition-colors text-brand-navy"
                 >
                   Enviar otra solicitud
